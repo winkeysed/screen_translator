@@ -1,0 +1,88 @@
+<Window x:Class="ScreenTranslator.ResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Перевод"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        Topmost="True"
+        Width="430"
+        SizeToContent="Height"
+        WindowStartupLocation="Manual">
+    <Window.Resources>
+        <Style x:Key="FlatButton" TargetType="Button">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <Setter Property="Foreground" Value="#FFDDDDDD"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B" Background="{TemplateBinding Background}"
+                                CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#55FFFFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#77FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border x:Name="Root"
+            Background="#F21E1E22" BorderBrush="#FF3AA0FF" BorderThickness="1"
+            CornerRadius="8" Padding="12,10"
+            MouseLeftButtonDown="Root_MouseLeftButtonDown">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="HeaderText"
+                           Grid.Column="0"
+                           Foreground="#FF7FB7E8" FontSize="11.5"
+                           VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis"/>
+                <Button x:Name="CloseButton"
+                        Grid.Column="1"
+                        Content="✕" Width="26" Height="22" Padding="0"
+                        Style="{StaticResource FlatButton}"
+                        Click="CloseButton_Click"/>
+            </Grid>
+            <ScrollViewer MaxHeight="340" VerticalScrollBarVisibility="Auto" Margin="0,8,0,0">
+                <TextBox x:Name="BodyBox"
+                         Background="Transparent" BorderThickness="0"
+                         Foreground="White" FontSize="14"
+                         TextWrapping="Wrap" IsReadOnly="True" IsTabStop="False"/>
+            </ScrollViewer>
+            <CheckBox x:Name="OriginalCheck"
+                      Content="Показать оригинал"
+                      Foreground="#FF9A9AA2" FontSize="11"
+                      Margin="0,8,0,0"
+                      Checked="OriginalCheck_Changed" Unchecked="OriginalCheck_Changed"/>
+            <DockPanel Margin="0,8,0,0">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button x:Name="CopyButton" Content="Копировать"
+                            Style="{StaticResource FlatButton}"
+                            Click="CopyButton_Click"/>
+                </StackPanel>
+                <TextBlock x:Name="FooterText"
+                           Foreground="#FF77777F" FontSize="11"
+                           VerticalAlignment="Center" Margin="0,0,8,0"
+                           TextTrimming="CharacterEllipsis"/>
+            </DockPanel>
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,38 @@
+<Window x:Class="ScreenTranslator.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Выбор области"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#26FFFFFF"
+        ShowInTaskbar="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        ShowActivated="True"
+        Cursor="Cross"
+        PreviewKeyDown="OnPreviewKeyDown"
+        MouseDown="OnMouseDown"
+        MouseMove="OnMouseMove"
+        MouseLeftButtonUp="OnMouseUp">
+    <Grid>
+        <Rectangle x:Name="Dim" Fill="#4D000000"/>
+        <Rectangle x:Name="Selection"
+                   Fill="#26009BE8" Stroke="#FF37B6FF" StrokeThickness="1.4"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Visibility="Hidden" Panel.ZIndex="2"/>
+        <Border x:Name="SizeBadge"
+                Background="#E6101014" CornerRadius="4" Padding="7,3"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden" Panel.ZIndex="3">
+            <TextBlock x:Name="SizeText" Foreground="#FFE8F4FF" FontSize="12"/>
+        </Border>
+        <Border x:Name="Hint"
+                Background="#B3101014" CornerRadius="6" Padding="12,6"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Margin="0,22,0,0" Panel.ZIndex="3">
+            <TextBlock Foreground="#FFDDEEFF" FontSize="13">
+                Выделите область с текстом  •  Esc или ПКМ — отмена
+            </TextBlock>
+        </Border>
+    </Grid>
+</Window>

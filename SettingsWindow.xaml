@@ -1,0 +1,98 @@
+<Window x:Class="ScreenTranslator.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Настройки — ScreenTranslator"
+        Width="560"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False">
+    <StackPanel Margin="18,14">
+
+        <TextBlock Text="Горячая клавиша запуска" FontWeight="SemiBold" FontSize="13"/>
+        <TextBox x:Name="HotkeyBox"
+                 IsReadOnly="True"
+                 PreviewKeyDown="HotkeyBox_PreviewKeyDown"
+                 Margin="0,6,0,2"
+                 ToolTip="Кликните сюда и нажмите новое сочетание (например Ctrl+Shift+T)"/>
+        <TextBlock Text="Кликните в поле и нажмите желаемое сочетание клавиш"
+                   FontSize="11" Foreground="#FF888888" Margin="0,0,0,12"/>
+
+        <TextBlock Text="Переводчик" FontWeight="SemiBold" FontSize="13"/>
+        <ComboBox x:Name="ProviderBox"
+                  SelectionChanged="ProviderBox_SelectionChanged"
+                  Margin="0,6,0,12">
+            <ComboBoxItem Content="Google — бесплатно, без ключа"/>
+            <ComboBoxItem Content="DeepL — нужен API-ключ"/>
+            <ComboBoxItem Content="LibreTranslate — публичный или свой сервер"/>
+        </ComboBox>
+
+        <StackPanel x:Name="DeeplPanel" Visibility="Collapsed" Margin="0,0,0,12">
+            <TextBlock Text="API-ключ DeepL"/>
+            <TextBox x:Name="DeeplKeyBox" Margin="0,4,0,4"/>
+            <CheckBox x:Name="DeeplFreeCheck" Content="Бесплатный ключ (оканчивается на :fx)"/>
+        </StackPanel>
+
+        <StackPanel x:Name="LibrePanel" Visibility="Collapsed" Margin="0,0,0,12">
+            <TextBlock Text="Адрес сервера (…/translate)"/>
+            <TextBox x:Name="LibreUrlBox" Margin="0,4,0,8"/>
+            <TextBlock Text="API-ключ (если сервер требует)"/>
+            <TextBox x:Name="LibreKeyBox" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <Grid Margin="0,0,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Язык перевода"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <TextBox x:Name="TargetBox" Grid.Row="0" Grid.Column="1" Margin="0,0,12,8"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Исходный язык"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <TextBox x:Name="SourceBox" Grid.Row="0" Grid.Column="3" Margin="0,0,0,8"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Язык распознавания"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <ComboBox x:Name="OcrCombo" Grid.Row="1" Grid.Column="1"
+                      Grid.ColumnSpan="3" Margin="0,0,0,8"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Масштаб снимка"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                       VerticalAlignment="Center" Margin="0,0,0,8">
+                <TextBlock x:Name="ScaleLabel" DockPanel.Dock="Right" Width="36"
+                           VerticalAlignment="Center" Text="×2"/>
+                <Slider x:Name="ScaleSlider" Minimum="1" Maximum="3"
+                        TickFrequency="0.25" IsSnapToTickEnabled="True"
+                        ValueChanged="ScaleSlider_ValueChanged"/>
+            </DockPanel>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Шрифт результата"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <TextBox x:Name="FontBox" Grid.Row="3" Grid.Column="1" Margin="0,0,12,8"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="Автоскрытие (сек)"
+                       VerticalAlignment="Center" Margin="0,0,8,8"/>
+            <TextBox x:Name="AutoHideBox" Grid.Row="3" Grid.Column="3" Margin="0,0,0,8"/>
+
+            <CheckBox x:Name="AutoCopyCheck" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                      Content="Автоматически копировать перевод в буфер обмена"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="SaveButton" Content="Сохранить" Click="Save_Click"
+                    MinWidth="90" Margin="0,0,8,0" IsDefault="True"/>
+            <Button Content="Отмена" Click="Cancel_Click" MinWidth="90" IsCancel="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
