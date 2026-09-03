@@ -39,8 +39,8 @@ Features / Возможности:
 **RU:** Нужна Windows 10 версии 2004 (сборка 19041) или новее — либо Windows 11 — и .NET 8 SDK для сборки. Целевая платформа привязана к Windows и использует WinRT OCR, поэтому собрать или запустить это на Linux или macOS невозможно. Файла `.sln` в проекте нет: указывай `dotnet` на папку или прямо на `ScreenTranslator.csproj`. Ещё потребуется хотя бы один языковой пакет распознавания Windows, иначе приложение запустится, но каждый снимок будет заканчиваться окном «OCR недоступен» — поставь пакет через Параметры → Время и язык → Язык и регион → Добавить язык и перезапусти приложение. Больше ничего ставить не надо: NuGet-зависимостей нет, а для провайдера Google по умолчанию не нужен API-ключ.
 
 ```powershell
-git clone https://github.com/<you>/ScreenTranslator.git
-cd ScreenTranslator
+git clone https://github.com/winkeysed/screen_translator
+cd screen_translator
 
 # run from source / запуск из исходников
 dotnet run
@@ -53,6 +53,8 @@ dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile
 
 # fully self-contained, no runtime needed / полностью автономная сборка, рантайм не нужен
 dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+
+но ещё будут в релизах компакт и обычная с .net
 ```
 
 ---
